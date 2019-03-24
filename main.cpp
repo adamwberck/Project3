@@ -7,23 +7,19 @@
 #include <malloc.h>
 #include "helper.h"
 #include <stdio.h>
+#include <assert.h>
 
 const char*  DEFAULT_DICTIONARY = "words.txt";
 
-int main() {
-    std::cout << "Hello, World!" << std::endl;
-    std::queue<const char*> test_q;
+int main(int argc,char* argv[]) {
+    assert(argc<=2);
     std::vector<char*> word_vector;
-    test_q.push("test1");
-    std::cout << test_q.front() << std::endl;
-    test_q.pop();
-
     FILE *file ;
-    file = fopen(DEFAULT_DICTIONARY, "r");
+    const char* dictionary = argc==1 ? DEFAULT_DICTIONARY : argv[1];
+    file = fopen(dictionary, "r");
     read_file_as_vector(word_vector, file);
-    for(char* word : word_vector){
-        std::cout << word << std::endl;
-    }
+
+    std::queue<const char*> connect_queue;
 
     return 0;
 }
